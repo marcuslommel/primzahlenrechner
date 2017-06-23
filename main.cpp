@@ -1,21 +1,28 @@
 /*
     Primzahlenrechner 2.0
     C++ 2012
-    Durchschnittszeit fÃ¼r Primzahlen von 1 - 50000:
+    Durchschnittszeit für Primzahlen von 1 - 50000:
     6.145s
+
+    ToDo:
+        - Zeit
+        - Multitasking
 */
 
 
 #include <iostream>
+#include <string>
+#include <fstream>
 using namespace std;
 
-bool calcPrim(int var);
+bool calcPrim(unsigned long long var);
 
-long long main()
+int main()
 {
-    int start, end, cur;
-    int count = 0;
+    unsigned long long start, end, cur;
+    unsigned long long count = 0;
     bool ifPrim;
+    string filename;
 
     cout << "Startzahl:" << endl;
     cin >> start;
@@ -24,14 +31,20 @@ long long main()
     cout << "Endzahl:" << endl;
     cin >> end;
 
+    cout << "Dateiname: ";
+    cin >> filename;
+
+    ofstream txtfile (filename.c_str());
+
     do
     {
         ifPrim = calcPrim(cur);
 
         if(ifPrim == true && cur != 1)
         {
-            count++;
+            txtfile << cur << endl;
             cout << cur << endl;
+            count++;
             cur++;
         }
         else
@@ -41,16 +54,24 @@ long long main()
     }
     while(cur <= end);
 
+    txtfile.close();
+
     cout << "Primzahlen gefunden: " << count << endl;
     cout << "Bereich: " << start << " - " << end << endl;
-    cout << "Es wurden keine Aufzeichnungnen erstellt." << endl;
+    cout << "Datei \"" << filename << "\" wurde erfolgreich erstellt" << endl;
+
+    cout << endl;
+    cout << "[ENTER] zum Beenden druecken..." << endl;
+
+    cin.ignore();
+    cin.get();
 
     return 0;
 }
 
-bool calcPrim(int var)
+bool calcPrim(unsigned long long var)
 {
-    int mod;
+    unsigned long long mod;
 
     for(int i = 2; i <= var; i++)
     {

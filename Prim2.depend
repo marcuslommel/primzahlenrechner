@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1351207724 source:c:\users\ano\desktop\other\coding\tools\c++\prim2\main.cpp
+	<iostream>
+	<string>
+	<fstream>
+
